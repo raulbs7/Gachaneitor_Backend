@@ -1,0 +1,45 @@
+.nav-item:hover::after{
+  width:100%;
+}
+.nav-item::after{
+  content:'';
+  display:block;
+  width:0px;
+  height:2px;
+  background:#fec400;
+  transition: 0.2s;
+}
+
+.navbar {
+  box-shadow: 0 0 4px 0 rgb(0, 0, .05);
+  min-height: 100px;
+}
+.navbar-brand {
+  font-family: 'Anton', sans-serif;
+  font-size: 200%;
+}
+
+#plx {
+  background: url("../res/deflate-inator.jpg") no-repeat fixed center;
+  background-size: cover;
+}
+
+.container {
+  padding-top: 10px;
+}
+
+.wtitle {
+  padding: 120px 20px;
+}
+
+.titulo {
+  border-radius: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  opacity: 0.8;
+}
+

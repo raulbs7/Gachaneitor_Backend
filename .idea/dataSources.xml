@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="db" uuid="e65b072d-f600-4b8c-895b-3760e536af73">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\raulb\Documents\Universidad\4º_Curso\PrimerCuatrimestre\Procesadores_de_Lenguajes\Práctica\Gachaneitor_Backend\gachaneitor\db.sqlite3</jdbc-url>
+    </data-source>
+  </component>
+</project>

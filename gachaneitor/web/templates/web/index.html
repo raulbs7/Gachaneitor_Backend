@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gachaneitor</title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'web/scss/estilos.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">GACHANEITOR</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Introducir receta<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recetas">Recetario</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="plx">
+        <div class="container">
+            <div class="wtitle text-center">
+                <h2 class="bg-light titulo">Una página para guardar tus recetas de la asombrosa Gachaneitor</h2>
+            </div>
+        </div>
+    </section>
+
+    <section id="contenido">
+        <form class="border border-light p-5" id="formulario" method="post"> {% csrf_token %}
+            <div class="container">
+                <div class="input-group">
+                    <div class="form-group">
+                        <label id="labelImportarArchivo">Importar archivo con recetas: </label>
+                        <input type="file" class="form-control-file btn btn-outline-info btn-rounded" name="fileReceta" id="inputArchivo">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <label id="titleTextAreaReceta">Introducir receta directamente en este cuadro de texto:</label>
+                <textarea class="form-control" name="textAreaReceta" id="textAreaReceta" rows="7"></textarea>
+            </div>
+            <div class="container">
+                <button class="btn btn-outline-info btn-rounded my-4 waves-effect" id="btnEnviar" type="submit">Enviar</button>
+            </div>
+        </form>
+    </section>
+
+    <section id="alerta">
+        <div class="alert alert-warning alert-dismissible fade show container collapse" style="display: none" role="alert" id="alertaCamposVacios">
+            <strong>No has introducido nada</strong> Introduce alguna receta, ya sea por medio de archivo o a través del cuadro de texto.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show container collapse" style="display: none" role="alert" id="alertaErrorLexico">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="page-footer font-small pt-4">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left bg-primary">
+
+            <!-- Grid row -->
+            <div class="row">
+                <div class="col-md-7 mt-md-0 mt-3">
+                    <p> </p>
+                </div>
+                <!-- Grid column -->
+                <div class="col-md-7 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase text-light">Información</h5>
+                    <p class="text-light">Esta herramienta ha sido realizada por Elena Hervás, Raúl Bernalte Sánchez,
+                    Enrique Cepeda y Elena María Ruiz</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3 bg-secondary text-light">© 2020 Copyright
+            <!--a href="https://mdbootstrap.com/" class="text-warning"> MDBootstrap.com</a-->
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+    {% load static %}
+    <script src="{% static 'web/js/jquery-3.5.1.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'web/js/popper.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'web/js/envioReceta.js' %}"></script>
+</body>
+</html>
