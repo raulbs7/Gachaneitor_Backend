@@ -1,2 +1,2 @@
-# Gachaneitor_frontend
-Repositorio para la parte de front end de el lenguaje de la Gachaneitor
+# Gachaneitor Backend
+Repositorio para el back end de el lenguaje de la Gachaneitor
