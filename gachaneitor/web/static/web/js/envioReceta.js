@@ -43,10 +43,19 @@ async function postReceta(text) {
         },
         dataType: 'json',
         success: function(response) {
-            alert("Esta es la receta que se ha enviado: " + response["receta"]);
+            create_feedback(response)
         }
     }
 );
+}
+
+function create_feedback(response) {
+    alert("Esta es la receta que se ha enviado: \n" + response.toString());
+    if (response["error"] === true) {
+        $("#alertaErrorLexico").prepend("Traza del procesado")
+        $("#alertaErrorLexico").prepend("<strong>"+"Error léxico"+"</strong><br>")
+        $("#alertaErrorLexico").fadeTo(4000, 500)
+    }
 }
 
 function getCookie(name) {

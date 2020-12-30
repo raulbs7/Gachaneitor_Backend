@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from django.template import loader
+from django.template import RequestContext, Template
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import TemplateView, ListView
 
 from .models import Receta, Ingrediente, Paso
-
+import json
 
 # Create your views here.
 
@@ -14,7 +14,8 @@ class IndexView(TemplateView):
 
     def post(self, request):
         result = request.POST['receta']
-        return JsonResponse({'receta': result}, status=200)
+        return JsonResponse({'error': True}, status=200)
+
 
 '''def index(request):
     template = loader.get_template('web/index.html')
