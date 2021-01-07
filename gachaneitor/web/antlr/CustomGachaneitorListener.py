@@ -18,7 +18,7 @@ class GachaneitorGeneralException(Exception):
         super().__init__(self.mensaje)
 
     def __str__(self):
-        return f'Error: {self.mensaje}.'  
+        return f'{self.mensaje}.'  
   
 class GachaneitorConcreteException(Exception):
 

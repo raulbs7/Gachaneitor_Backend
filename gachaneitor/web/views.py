@@ -1,7 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from django.template import RequestContext, Template
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.http import JsonResponse
 from django.views.generic import TemplateView, ListView
 
 from .models import Receta, Ingrediente, Paso
@@ -12,16 +9,24 @@ class IndexView(TemplateView):
     template_name = 'web/index.html'
 
     def post(self, request):
-        print(request.POST)
         text = request.POST['receta']
         
         try:
-            print(text)
             recetas_dict = web_main(text)
+            self.save_recetas(recetas_dict)
             return JsonResponse({'error': False, 'result': 'La receta ha sido almacenada correctamente'},
                                  status=200)
         except Exception as e:
-            return JsonResponse({'error': True, 'result': str(e)}, status=200)
+            error = str(e)
+            return JsonResponse({'error': True, 'result': error}, status=200)
+    
+    def save_recetas(self, recetas):
+        for receta in recetas:
+            Receta(receta["nombre"], receta["descripcion"], 
+                    receta["total"]["cantidad"], receta["total"]["unidad"],
+                    receta["preparacion"]["cantidad"], receta["preparacion"]["unidad"])
+            
+            
 
 class RecetasView(ListView):
     template_name = 'web/recetas.html'

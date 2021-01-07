@@ -13,8 +13,8 @@ class Receta(models.Model):
         (MINUTOS, 'Minutos'),
         (SEGUNDOS, 'Segundos')
     ]
-    id = models.UUIDField(default=uuid.uuid4, editable=False)
-    nombre = models.CharField(max_length=128, primary_key=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    nombre = models.CharField(max_length=128)
     descripcion = models.TextField()
     tmp_preparacion = models.IntegerField(default=0)
     ud_tmp_preparacion = models.CharField(max_length=3, choices=UNIDADES_TIEMPO_CHOICES)

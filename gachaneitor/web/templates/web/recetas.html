@@ -45,25 +45,21 @@
                         </ul>
                         <h6 class="card-subtitle">Ingredientes</h6>
                         <ul class="card-text">
-                            {% for ingrediente in ingredientes %}
-                                {% if ingrediente.receta|stringformat:"s" == receta.nombre|stringformat:"s" %}
-                                    <li class="card-text"><strong>{{ ingrediente.nombre }}: </strong>{{ ingrediente.cantidad }} {{ ingrediente.ud_cantidad }}.</li>
-                                {% endif %}
+                            {% for ingrediente in receta.ingrediente_set.all %}
+                                <li class="card-text"><strong>{{ ingrediente.nombre }}: </strong>{{ ingrediente.cantidad }} {{ ingrediente.ud_cantidad }}.</li>
                             {% endfor %}
                         </ul>
                         <h6 class="card-subtitle">Pasos</h6>
                         <ul class="card-text">
-                            {% for paso in pasos %}
-                                {% if paso.receta|stringformat:"s" == receta.nombre|stringformat:"s" %}
-                                    {% if paso.temperatura %}
-                                    <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }},
-                                        a una temperatura de {{ paso.temperatura }} {{ paso.ud_temperatura }}.</li>
-                                    {% elif paso.velocidad %}
-                                    <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }},
-                                        a velocidad {{ paso.velocidad }}.</li>
-                                    {% else %}
-                                    <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }}.</li>
-                                    {% endif %}
+                            {% for paso in receta.paso_set.all %}
+                                {% if paso.temperatura %}
+                                <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }},
+                                    a una temperatura de {{ paso.temperatura }} {{ paso.ud_temperatura }}.</li>
+                                {% elif paso.velocidad %}
+                                <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }},
+                                    a velocidad {{ paso.velocidad }}.</li>
+                                {% else %}
+                                <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }}.</li>
                                 {% endif %}
                             {% endfor %}
                         </ul>

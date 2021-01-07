@@ -7,6 +7,7 @@ $.ajaxSetup({
         xhr.setRequestHeader("X-CSRFToken", csrfToken);
     }
 })
+
 formulario.addEventListener("submit", function (e) {
     e.preventDefault();
     var Datos = new FormData(formulario);
@@ -15,7 +16,6 @@ formulario.addEventListener("submit", function (e) {
     if ($('#fileReceta').val()) {
         reader.readAsText(Datos.get("fileReceta"), "UTF-8");
         reader.onload = function (evt) {
-            console.log(evt.target.result)
             postReceta(evt.target.result);
         }
     }
@@ -50,23 +50,15 @@ async function postReceta(text) {
 function create_feedback(response) {
     alert("Esta es la receta que se ha enviado: \n" + response.toString());
     if (response["error"] === false) {
-        $("#alertaExito").empty()
-        $("#alertaExito").prepend(response["result"])
-        $("#alertaExito").prepend("<strong>" + "Exito" + "</strong><br>")
-        $("#alertaExito").append(<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>)
-        $("#alertaExito").fadeTo(4000, 500)
+        $("#alertaError").hide();
+        $("#alertaExito").show();
+        $("#alertaExito").html("<strong>" + "Exito" + "</strong><br>" + response["result"])
     }
 
     if (response["error"] === true) {
-        $("#alertaError").empty()
-        $("#alertaError").prepend(response["result"])
-        $("#alertaError").prepend("<strong>" + "Error" + "</strong><br>")
-        $("#alertaError").append(<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>)
-        $("#alertaError").fadeTo(4000, 500)
+        $("#alertaExito").hide();
+        $("#alertaError").show()
+        $("#alertaError").html("<strong>" + "Error" + "</strong><br>" + response["result"])
     }
 }
 
