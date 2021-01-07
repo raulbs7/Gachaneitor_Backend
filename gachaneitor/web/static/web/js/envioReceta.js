@@ -12,13 +12,14 @@ formulario.addEventListener("submit", function (e) {
     var Datos = new FormData(formulario);
     var reader = new FileReader();
 
-    if( $('#inputArchivo').val() ){
+    if ($('#fileReceta').val()) {
         reader.readAsText(Datos.get("fileReceta"), "UTF-8");
         reader.onload = function (evt) {
+            console.log(evt.target.result)
             postReceta(evt.target.result);
         }
     }
-    else if( $("#textAreaReceta").val().length ) {
+    else if ($("#textAreaReceta").val().length) {
         postReceta(Datos.get("textAreaReceta"))
     }
     else {
@@ -26,35 +27,46 @@ formulario.addEventListener("submit", function (e) {
             $("#alertaCamposVacios").slideUp(500)
         })
     }
-
-
-    //let req = new Request(uri, options);
 })
 
 async function postReceta(text) {
     var url = '/';
 
     $.ajax(
-    {
-        type: 'POST',
-        url: url,
-        data: {
-            "receta": text
-        },
-        dataType: 'json',
-        success: function(response) {
-            create_feedback(response)
+        {
+            type: 'POST',
+            url: url,
+            data: {
+                "receta": text
+            },
+            dataType: 'json',
+            success: function (response) {
+                create_feedback(response)
+            }
         }
-    }
-);
+    );
 }
 
 function create_feedback(response) {
     alert("Esta es la receta que se ha enviado: \n" + response.toString());
+    if (response["error"] === false) {
+        $("#alertaExito").empty()
+        $("#alertaExito").prepend(response["result"])
+        $("#alertaExito").prepend("<strong>" + "Exito" + "</strong><br>")
+        $("#alertaExito").append(<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>)
+        $("#alertaExito").fadeTo(4000, 500)
+    }
+
     if (response["error"] === true) {
-        $("#alertaErrorLexico").prepend("Traza del procesado")
-        $("#alertaErrorLexico").prepend("<strong>"+"Error léxico"+"</strong><br>")
-        $("#alertaErrorLexico").fadeTo(4000, 500)
+        $("#alertaError").empty()
+        $("#alertaError").prepend(response["result"])
+        $("#alertaError").prepend("<strong>" + "Error" + "</strong><br>")
+        $("#alertaError").append(<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>)
+        $("#alertaError").fadeTo(4000, 500)
     }
 }
 
@@ -64,7 +76,6 @@ function getCookie(name) {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
             if (cookie.substring(0, name.length + 1) === (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;

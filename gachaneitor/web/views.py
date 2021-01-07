@@ -6,22 +6,22 @@ from django.views.generic import TemplateView, ListView
 
 from .models import Receta, Ingrediente, Paso
 import json
-
-# Create your views here.
+from web.antlr.main import web_main
 
 class IndexView(TemplateView):
     template_name = 'web/index.html'
 
     def post(self, request):
-        result = request.POST['receta']
-        return JsonResponse({'error': True}, status=200)
-
-
-'''def index(request):
-    template = loader.get_template('web/index.html')
-    context = {}
-    return HttpResponse(template.render(context, request))'''
-
+        print(request.POST)
+        text = request.POST['receta']
+        
+        try:
+            print(text)
+            recetas_dict = web_main(text)
+            return JsonResponse({'error': False, 'result': 'La receta ha sido almacenada correctamente'},
+                                 status=200)
+        except Exception as e:
+            return JsonResponse({'error': True, 'result': str(e)}, status=200)
 
 class RecetasView(ListView):
     template_name = 'web/recetas.html'
@@ -37,16 +37,3 @@ class RecetasView(ListView):
         context['ingredientes'] = Ingrediente.objects.all().order_by('nombre')
         context['pasos'] = Paso.objects.all().order_by('num_paso')
         return context
-
-
-'''def recetas(request):
-    template = loader.get_template('web/recetas.html')
-    recetas = Receta.objects.all().order_by('nombre')
-    ingredientes = Ingrediente.objects.all().order_by('nombre')
-    pasos = Paso.objects.all().order_by('num_paso')
-    context = {
-        'recetas': recetas,
-        'ingredientes': ingredientes,
-        'pasos': pasos
-    }
-    return HttpResponse(template.render(context, request))'''
