@@ -1,4 +1,6 @@
 var formulario = document.getElementById("formulario");
+var btnEnviar = document.getElementById("btnEnviar");
+var btnClose = document.getElementsByClassName("close");
 
 var csrfToken = getCookie("csrftoken");
 
@@ -7,20 +9,28 @@ $.ajaxSetup({
         xhr.setRequestHeader("X-CSRFToken", csrfToken);
     }
 })
-formulario.addEventListener("submit", function (e) {
+btnEnviar.addEventListener("click", function (e) {
     e.preventDefault();
-    var Datos = new FormData(formulario);
+    //var Datos = new FormData(formulario);
+    var textArea = document.getElementById("textAreaReceta").value;
     var reader = new FileReader();
 
+    $('#alertaExito').slideUp(200)
+    $('#alertaCamposVacios').slideUp(200)
+    $('#alertaError').slideUp(200)
+
     if ($('#fileReceta').val()) {
-        reader.readAsText(Datos.get("fileReceta"), "UTF-8");
-        reader.onload = function (evt) {
-            console.log(evt.target.result)
-            postReceta(evt.target.result);
-        }
+        $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            reader.readAsText(fileName, "UTF-8");
+            reader.onload = function (evt) {
+                console.log(evt.target.result);
+                postReceta(evt.target.result);
+            }
+        });
     }
     else if ($("#textAreaReceta").val().length) {
-        postReceta(Datos.get("textAreaReceta"))
+        postReceta(textArea);
     }
     else {
         $("#alertaCamposVacios").fadeTo(4000, 500).slideUp(500, function () {
@@ -48,25 +58,26 @@ async function postReceta(text) {
 }
 
 function create_feedback(response) {
-    alert("Esta es la receta que se ha enviado: \n" + response.toString());
+    //alert("Esta es la receta que se ha enviado: \n" + response.toString());
     if (response["error"] === false) {
         $("#alertaExito").empty()
+        $("#alertaExito").slideDown(200)
         $("#alertaExito").prepend(response["result"])
         $("#alertaExito").prepend("<strong>" + "Exito" + "</strong><br>")
-        $("#alertaExito").append(<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>)
-        $("#alertaExito").fadeTo(4000, 500)
+        //$("#alertaExito").append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">"+
+        //    "<span aria-hidden=\"true\">&times;</span>"+
+        //"</button>")
     }
 
     if (response["error"] === true) {
         $("#alertaError").empty()
+        $("#alertaError").slideDown(200)
+        $("#alertaError").show()
         $("#alertaError").prepend(response["result"])
         $("#alertaError").prepend("<strong>" + "Error" + "</strong><br>")
-        $("#alertaError").append(<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>)
-        $("#alertaError").fadeTo(4000, 500)
+        //$("#alertaError").append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">"+
+        //    "<span aria-hidden=\"true\">&times;</span>"+
+        //"</button>")
     }
 }
 
