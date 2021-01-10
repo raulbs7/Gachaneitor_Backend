@@ -40,6 +40,7 @@ class Ingrediente(models.Model):
         (MILILITROS, 'Mililitros'),
         (LITROS, 'Litros')
     ]
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     receta = models.ForeignKey(Receta, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=128)
     cantidad = models.IntegerField(default=0)
@@ -51,12 +52,6 @@ class Ingrediente(models.Model):
     def __str__(self):
         return f'{self.nombre}'
 
-    def save(self, *args, **kwargs):
-        field_name = 'nombre'
-        val = getattr(self, field_name, False)
-        if val:
-            setattr(self, field_name, val.capitalize())
-        super(Ingrediente, self).save(*args, **kwargs)
 
 class Paso(models.Model):
     CENTIGRADOS = 'ºC'
@@ -73,6 +68,14 @@ class Paso(models.Model):
         (PERSONA, 'Por la persona'),
         (MOVER, 'Mover')
     ]
+    HORAS = 'h'
+    MINUTOS = 'min'
+    SEGUNDOS = 's'
+    UNIDADES_TIEMPO_CHOICES = [
+        (HORAS, 'Horas'),
+        (MINUTOS, 'Minutos'),
+        (SEGUNDOS, 'Segundos')
+    ]
     receta = models.ForeignKey(Receta, on_delete=models.CASCADE)
     num_paso = models.IntegerField(validators=[MinValueValidator(1)])
     verbo = models.CharField(max_length=128)
@@ -81,6 +84,8 @@ class Paso(models.Model):
     temperatura = models.IntegerField(null=True, blank=True)
     ud_temperatura = models.CharField(max_length=2, blank=True, choices=UNIDADES_TEMPERATURA_CHOICES)
     velocidad = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    tiempo = models.IntegerField(null=True, blank=True)
+    ud_tiempo = models.CharField(max_length=3, blank=True, choices=UNIDADES_TIEMPO_CHOICES)
 
     class Meta:
         unique_together = [['receta', 'num_paso']]

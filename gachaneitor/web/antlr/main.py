@@ -1,19 +1,29 @@
 import sys
 from argparse import ArgumentParser
 from antlr4 import FileStream, CommonTokenStream, ParseTreeWalker, InputStream
+from antlr4.error.ErrorStrategy import BailErrorStrategy
 from web.antlr.GachaneitorLexer import GachaneitorLexer
 from web.antlr.GachaneitorParser import GachaneitorParser
 from web.antlr.CustomGachaneitorListener import CustomGachaneitorListener
- 
+from antlr4.error.ErrorListener import ErrorListener
+
+class CustomErrorListener(ErrorListener):
+    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+        raise Exception("line " + str(line) + ":" + str(column) + " " + msg)
+
 
 def web_main(text):
     input_stream = InputStream(text)
     lexer = GachaneitorLexer(input_stream)
-
     stream = CommonTokenStream(lexer)
-    parser = GachaneitorParser(stream)
-    tree = parser.inicio()
     
+    parser = GachaneitorParser(stream)
+
+    parser.removeErrorListeners()
+    parser.addErrorListener(CustomErrorListener())
+    #parser._errHandler = BailErrorStrategy()
+    tree = parser.inicio()
+
     listener = CustomGachaneitorListener()
     walker = ParseTreeWalker()
 

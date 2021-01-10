@@ -181,16 +181,11 @@ class CustomGachaneitorListener(GachaneitorListener):
 
     def enterReceta(self, ctx:GachaneitorParser.RecetaContext):
         self.receta_actual = Receta()
-
-    def exitReceta(self, ctx:GachaneitorParser.RecetaContext):
-        self.comprobar_tiempos()
-        self.comprobar_ingredientes_usados()
-        self.recetas.append(self.receta_actual.get_dict())
         
     def exitReceta(self, ctx:GachaneitorParser.RecetaContext):
         self.comprobar_tiempos()
         self.comprobar_ingredientes_usados()
-        self.recetas.append(self.receta_actual)
+        self.recetas.append(self.receta_actual.get_dict())
 
     def enterNombre(self, ctx:GachaneitorParser.InicioContext):
         self.receta_actual.nombre = str(ctx.IDENT_NOMBRE())
