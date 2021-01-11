@@ -48,7 +48,7 @@ async function postReceta(text) {
 }
 
 function create_feedback(response) {
-    alert("Esta es la receta que se ha enviado: \n" + response.toString());
+    alert("Se ha enviado la receta");
     if (response["error"] === false) {
         $("#alertaCamposVacios").hide()
         $("#alertaError").hide();
