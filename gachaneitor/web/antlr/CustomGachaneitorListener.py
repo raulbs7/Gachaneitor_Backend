@@ -1,6 +1,5 @@
 from web.antlr.GachaneitorListener import GachaneitorListener
 from web.antlr.GachaneitorParser import GachaneitorParser
-from antlr4.error.Errors import FailedPredicateException
 import json
 import sys
 

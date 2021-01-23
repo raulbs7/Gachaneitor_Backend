@@ -35,22 +35,22 @@
             <div class="container">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ receta.nombre }}</h5>
-                        <h6 class="card-subtitle">Descripción</h6>
-                        <p class="card-text">{{ receta.descripcion }}</p>
-                        <h6 class="card-subtitle">Tiempo</h6>
+                        <h4 class="card-title">{{ receta.nombre }}</h4>
+                        <h5 class="card-subtitle"> <i> Descripción </i> </h5>
+                        <p class="card-text" style="padding-left: 20px">{{ receta.descripcion }}</p>
+                        <h5 class="card-subtitle"> <i> Tiempo </i> </h5>
                         <ul class="card-text">
                             <li class="card-text"><strong>Preparación: </strong>{{ receta.tmp_preparacion}} {{ receta.ud_tmp_preparacion }}.</li>
                             <li class="card-text"><strong>Total: </strong>{{ receta.tmp_preparacion}} {{ receta.ud_tmp_preparacion }}.</li>
                         </ul>
-                        <h6 class="card-subtitle">Ingredientes</h6>
+                        <h5 class="card-subtitle"> <i> Ingredientes </i> </h5>
                         <ul class="card-text">
                             {% for ingrediente in receta.ingrediente_set.all %}
                                 <li class="card-text"><strong>{{ ingrediente.nombre }}: </strong>{{ ingrediente.cantidad }} {{ ingrediente.ud_cantidad }}.</li>
                             {% endfor %}
                         </ul>
-                        <h6 class="card-subtitle">Pasos</h6>
-                        <ul class="card-text">
+                        <h5 class="card-subtitle"> <i> Pasos </i></h5>
+                        <ol class="card-text">
                             {% for paso in receta.paso_set.all %}
                                 {% if paso.temperatura %}
                                 <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }},
@@ -62,7 +62,7 @@
                                 <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }}.</li>
                                 {% endif %}
                             {% endfor %}
-                        </ul>
+                        </ol>
                     </div>
                 </div>
             </div>
