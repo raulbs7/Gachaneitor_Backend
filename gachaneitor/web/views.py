@@ -75,7 +75,7 @@ class RecetasView(ListView):
     template_name = 'web/recetas.html'
     context_object_name = 'recetas'
     model = Receta
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         return super().get_queryset().order_by('nombre')
