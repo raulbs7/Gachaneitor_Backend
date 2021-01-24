@@ -34,9 +34,9 @@ NUMERO : [1-9][0-9]*;
 DIGITO_VELOCIDAD : '0'[1-9]; 
 
 IDENT_NOMBRE : [A-Z]([a-z] | ' ' | TILDES | 'ñ' | 'Á')*; 
-CADENA : ([A-Z] | [a-z] | [0-9] | OTROS_CARACTERES | TILDES | 'ñ'| 'Á')+;
+CADENA : ([A-Z] | [a-z] | [0-9] | OTROS_CARACTERES | TILDES | 'ñ'| 'Ñ' )+;
 
-TILDES : 'á' | 'é' | 'í' | 'ó' | 'ú' | 'É' | 'Í' | 'Ó' | 'Ú';
+TILDES : 'á' | 'é' | 'í' | 'ó' | 'ú' | 'Á' | 'É' | 'Í' | 'Ó' | 'Ú';
 
 CONTENIDO_DESCRIPCION : CORCHETE_ABIERTO (CADENA | ' ')* CORCHETE_CERRADO ;
 
