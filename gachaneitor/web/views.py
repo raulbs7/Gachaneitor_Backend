@@ -85,3 +85,6 @@ class RecetasView(ListView):
         context['ingredientes'] = Ingrediente.objects.all().order_by('nombre')
         context['pasos'] = Paso.objects.all().order_by('num_paso')
         return context
+
+class HowToView(TemplateView):
+    template_name='web/howto.html'
