@@ -2,6 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import subprocess
 
 
 def main():
@@ -17,6 +18,12 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
+def compile_antlr():
+    antlr4_jar = ["java", "-jar", "/usr/local/lib/antlr-4.9-complete.jar"]
+    g4_path = "web/antlr/Gachaneitor.g4"
+    antlr_compile = antlr4_jar + [ "-Dlanguage=Python3", "-encoding", "utf-8", g4_path ]
+    subprocess.call(antlr_compile)
 
 if __name__ == '__main__':
+    compile_antlr()
     main()
