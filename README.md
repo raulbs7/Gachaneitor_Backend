@@ -1,31 +1,46 @@
 # Gachaneitor Backend
 
-_Este repositorio contiene el software necesario para el despliegue de una página
+Este repositorio contiene el software necesario para el despliegue de una página
 web, cuya función será la de proporcionar un entorno en el que se podrán subir
-recetas de la famosa Gachaneitor. Esto se hará mediante el envió de recetas en el
-lenguaje propio de este dominio._
+recetas de la famosa Gachaneitor. Esto se hará mediante el envio de recetas en el
+lenguaje propio de este dominio.
 
 ## Pre-requisitos 📋
 
-Antes de ejecutar el servidor por el cual se desplegará esta página web, deberán de
-instalarse una serie de requisitos.
+Antes de ejecutar el servidor por el cual se desplegará esta página web, se deben
+instalar una serie de requisitos.
 
-Para ello, es recomendable crear un entorno virtual con 
-el módulo de entornos virtuales ``venv``.
+El primer requisito es instalar la versión de Python 3.8.
+Para instalar las dependencias es recomendable crear un entorno virtual con el módulo de entornos virtuales ``venv``.
+
+Este módulo permite aislar las dependencias entre distintos proyectos, creando diferentes intérpretes para cada uno con sus respectivas dependencias. El siguiente comando crea un intérprete en el directorio elegido.
+
 ```
 python3 -m venv venv
 ```
 
-Una vez elegido si la instalación sea en entorno virtual o en el propio entorno de
-Python, se debe instalar los requisitos del archivo ``requirements.txt``.
+Si se escoge crear un entorno virtual, la forma de utilizar el intérprete es usando el siguiente comando.
+
 ```
-pip install -r requirements.txt
+source venv/bin/activate
+```
+
+Para volver a usar el intérprete por defecto del sistema se tiene que ejecutar el siguiente comando.
+
+```
+deactivate
+```
+
+Tanto si se hace la instalación de las dependencias en un entorno virtual, como si se hace en el intérprete por defecto del sistema, los requisitos del proyecto se instalan utilizando el siguiente comando.
+
+```
+pip3 install -r requirements.txt
 ```
 
 ## Despliegue 📦
 
-Para ejecutar el servidor, y que la web pueda ser consultada, debemos iniciar Django. 
-Para ello se debe ejecutar el siguiente comando.
+Para ejecutar el servidor y para que la web pueda ser consultada, debemos iniciar el servidor de Django. Para ello se debe entrar en la carpeta gachaneitor y ejecutar el siguiente comando.
+
 ```
 python3 manage.py runserver
 ```
@@ -35,9 +50,12 @@ dirección en el navegador: __http://127.0.0.1:8000__
 
 ## Herramientas
 
-Como ya se ha mencionado, la herramienta utilizada para crear esta web será 
+Como se ha mencionado en la documentación, las herramientas utilizadas para crear esta web han sido las siguiente
 
 * [Django](https://docs.djangoproject.com/en/3.1/) - Documentación de Django.
+* [ANTLR](https://www.antlr.org/)
+* Javascript, CSS y plantillas HTML.
+
 
 ## Autores
 
