@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gachaneitor</title>
+    <title>Como crear una receta</title>
     {% load static %}
     <link type="text/css" rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
     {% load static %}
     <link type="text/css" rel="stylesheet" href="{% static 'web/scss/estilos.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'web/res/icono.png' %}">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -40,7 +42,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-md-6">
                 <h2>Modo de introducción</h2>
                 <p>Existen dos modos para introducir las recetas:</p>
@@ -50,11 +52,88 @@
                 </ul>
                 <p>En caso de que se introduzcan ambas opciones, se le dará mayor prioridad al archivo subido.</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 p-4">
+                <div class="text-center">
+                    {% load static %}
+                    <img src="{% static 'web/res/upload.png' %}" class="img-thumbnail rounded-circle shadow w-50" alt="...">
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+        <div class='col-lg-12 px-m-5'>
+        <hr>
+       </div>
+       </div>
+        <div class="row align-items-center">
+            <div class="col-md-6 jumbotron">
+                <samp>
+                    <strong>receta</strong> {<br>
+                        &emsp;&emsp;<strong>nombre</strong> "Puré"<br>
+                        &emsp;&emsp;<strong>descripcion</strong> [Esta es una receta muy rica]<br>
+                        &emsp;&emsp;<strong>tiempo</strong> {<br>
+                            &emsp;&emsp;&emsp;&emsp;<em>total</em> 20 min /* Comprobar con suma de tiempos parciales (Opcional) */<br>
+                            &emsp;&emsp;&emsp;&emsp;<em>preparacion</em> 5 min /* No hace falta comprobar, porque son verbos de persona */<br>
+                        &emsp;&emsp;}<br>
+                        <br>
+                        &emsp;&emsp;<strong>ingredientes</strong> {<br>
+                            &emsp;&emsp;&emsp;&emsp;"Calabaza": 2 ud;<br>
+                            &emsp;&emsp;&emsp;&emsp;"Calabacín": 2 ud;<br>
+                        &emsp;&emsp;}<br>
+                        <br>
+                        &emsp;&emsp;<strong>pasos</strong> {<br>
+                            &emsp;&emsp;&emsp;&emsp;- <em>pelar</em> "Calabacín": 2 ud; "Calabaza": 2 ud;<br>
+                            &emsp;&emsp;&emsp;&emsp;- <em>trocear</em> "Calabacín": 2 ud; "Calabaza": 2 ud;<br>
+                            &emsp;&emsp;&emsp;&emsp;- <em>sofreir</em> "Calabacín": 2 ud; "Calabaza": 2 ud; 10 min temperatura 20ºC<br>
+                            &emsp;&emsp;&emsp;&emsp;- <em>triturar</em> "Calabacín": 2 ud; "Calabaza": 2 ud; 10 min velocidad 02<br>
+                        &emsp;&emsp;}<br>
+                    }
+                </samp>
+            </div>
+
+            <div class="col-md-6 p-4">
                 <h2>Como escribir la receta</h2>
-                <p>El lenguaje utilizado para introducir recetas es el que ya se ha definido en la documentación del proyecto.</p>
-                <p>Esto es un lenguaje específico del dominio en el que la receta se define entre llaves. En ella se separa el tiempo, el nombre (y descripción),
-                    ingredientes y pasos, los cuales cada uno de estos van entre llaves también.</p>
+                <p>Esto es un lenguaje específico del dominio en el que la receta se define de la siguiente forma:</p>
+                <ul>
+                    <li>La palabra <code>receta</code> junto a dos llaves (una abierta y una cerrada) que indica el comienzo de una receta,
+                        ya que pueden existir varias.</li>
+                    <li>Dentro de estas llaves, están situadas las partes que conforman una receta en el siguiente orden fijo:
+                        <ul>
+                            <li>
+                                El <strong>nombre</strong> de la receta, que se define mediante la palabra <code>nombre</code> (opcional) y a continuación el
+                                nombre de la misma entre comillas (e.g. nombre "Puré").
+                            </li>
+                            <li>
+                                La <strong>descripción</strong> de esta receta, que se define mediante la palabra <code>descripcion</code> (opcional) seguida
+                                de una descripción entre corchetes.
+                            </li>
+                            <li>
+                                El <strong>tiempo</strong> de la receta, que se define mediante la palabra <code>tiempo</code> (opcional) seguida de dos llaves. Entre ellas:
+                                <ul>
+                                    <li>
+                                        El <strong>tiempo total</strong> se declara mediante la palabra <code>total</code> junto con el que la máquina invierte en procesar los alimentos.
+                                        Seguido de esto viene una unidad de tiempo (<code>h</code>, <code>min</code>, <code>seg</code>).
+                                    </li>
+                                    <li>
+                                        El <strong>tiempo de preparación</strong> se declara mediante la palabra <code>preparacion</code> junto con el tiempo invertido en la misma (<code>h</code>, <code>min</code>, <code>seg</code>).
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Los <strong>ingredientes</strong> es la sección donde se declaran todos los ingredientes usados en la receta en forma de lista. Esta sección se define
+                                con la palabra <code>ingredientes</code> (opcional), seguida de una llave abierta y otra cerrada. Se puede separar los ingredientes mediante punto y coma
+                                aunque no es necesario. También, cada ingrediente debe ir acompañado de su cantidad de masa (<code>kg</code>, <code>g</code>, <code>mg</code>),
+                                volumen (<code>l</code>, <code>ml</code>) y unidad (<code>ud</code>).
+                            </li>
+                            <li>
+                                Los <strong>pasos</strong> se definen con la palabra <code>pasos</code>, lo cual es opcional, seguido de llaves. Dentro de él, cada paso se define por un
+                                <strong>guión</strong>, un <strong>verbo</strong> y unos <strong>ingredientes</strong> y su <strong>cantidad</strong>.
+                                Aparte de esto, según el significado de su verbo, podremos añadir <strong>temperatura</strong> y <strong>velocidad</strong>.
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <p>También se pueden meter comentarios en este lenguaje. Para más información, ver en la documentación del lenguaje.</p>
             </div>
         </div>
     </div>
