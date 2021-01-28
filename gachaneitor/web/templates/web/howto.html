@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Como crear una receta</title>
+    <title>Cómo crear una receta</title>
     {% load static %}
     <link type="text/css" rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
     {% load static %}
@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/howto">Como crear una receta</a>
+                    <a class="nav-link" href="/howto">Cómo crear una receta</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/">Introducir receta </a>
@@ -37,8 +37,8 @@
 
     <div class="jumbotron">
         <div classs="container">
-            <h1>Como crear una receta</h1>
-            <p>Es importante saber que tipo de pasos se deben seguir para pasar una receta a este repositorio.</p>
+            <h1>Cómo crear una receta</h1>
+            <p>Es importante saber qué tipo de pasos se deben seguir para añadir una receta a este repositorio.</p>
         </div>
     </div>
     <div class="container">
@@ -47,10 +47,10 @@
                 <h2>Modo de introducción</h2>
                 <p>Existen dos modos para introducir las recetas:</p>
                 <ul>
-                    <li>Por medio un archivo subido.</li>
-                    <li>En la propia página, por medio de un área de texto.</li>
+                    <li>Importando un archivo de texto desde la máquina.</li>
+                    <li>En la propia página, escribir la receta a mano en un área de texto.</li>
                 </ul>
-                <p>En caso de que se introduzcan ambas opciones, se le dará mayor prioridad al archivo subido.</p>
+                <p>En caso de que se introduzcan ambas opciones, se le dará mayor prioridad al archivo subido, por lo que el procesador analizará la receta del archivo txt.</p>
             </div>
             <div class="col-md-6 p-4">
                 <div class="text-center">
@@ -59,11 +59,14 @@
                 </div>
             </div>
         </div>
+
+
         <div class='row'>
         <div class='col-lg-12 px-m-5'>
         <hr>
        </div>
        </div>
+
         <div class="row align-items-center">
             <div class="col-md-6 jumbotron">
                 <samp>
@@ -91,11 +94,11 @@
             </div>
 
             <div class="col-md-6 p-4">
-                <h2>Como escribir la receta</h2>
-                <p>Esto es un lenguaje específico del dominio en el que la receta se define de la siguiente forma:</p>
+                <h2>Cómo escribir la receta</h2>
+                <p><i>Gachalanguage</i> es un lenguaje específico del dominio en el que cadaa receta se define de la siguiente forma:</p>
                 <ul>
-                    <li>La palabra <code>receta</code> junto a dos llaves (una abierta y una cerrada) que indica el comienzo de una receta,
-                        ya que pueden existir varias.</li>
+                    <li>La palabra <code>receta</code> junto a dos llaves (una abierta y una cerrada) que indica el comienzo de una receta
+                        (ya que pueden existir varias en la misma cadena).</li>
                     <li>Dentro de estas llaves, están situadas las partes que conforman una receta en el siguiente orden fijo:
                         <ul>
                             <li>
@@ -126,15 +129,106 @@
                             </li>
                             <li>
                                 Los <strong>pasos</strong> se definen con la palabra <code>pasos</code>, lo cual es opcional, seguido de llaves. Dentro de él, cada paso se define por un
-                                <strong>guión</strong>, un <strong>verbo</strong> y unos <strong>ingredientes</strong> y su <strong>cantidad</strong>.
-                                Aparte de esto, según el significado de su verbo, podremos añadir <strong>temperatura</strong> y <strong>velocidad</strong>.
+                                <strong>guion</strong>, un <strong>verbo</strong> y unos <strong>ingredientes</strong> con sus respectivas <strong>cantidades</strong>.
+                                Aparte de esto, según el significado del verbo, podremos añadir <strong>temperatura</strong> y <strong>velocidad</strong>.
                             </li>
                         </ul>
                     </li>
 
                 </ul>
-                <p>También se pueden meter comentarios en este lenguaje. Para más información, ver en la documentación del lenguaje.</p>
             </div>
+
+                <p>Además se pueden introducir comentarios entre los símbolos /* y */ que, aunque la web no los muestre, pueden ser de utilidad para almacenar trucos 
+                y/o información adicional. <i> Para más información, véase la documentación del lenguaje.</i> </p>
+
+                <p> A continuación se muestran los tipos de verbos permitidos a la hora de describir el paso de una receta. </p>
+
+        </div>
+
+                
+        <div class='row'> <div class='col-lg-12 px-m-5'> <hr> </div> </div>
+        
+        <h2 style="text-align: center;">Tipos de verbos permitidos en los pasos </h2>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+            <table class="table">
+                <thead>
+                    <tr class="table-primary">
+                    <th scope="col">Verbo de movimiento <br> (usan tiempo y velocidad)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>licuar</td>
+                    </tr>
+                    <tr>
+                        <td>triturar</td>
+                    </tr>
+                    <tr>
+                        <td>batir</td>
+                    </tr>
+                    <tr>
+                        <td>dejar reposar</td>
+                    </tr>
+                    <tr>
+                        <td>amasar</td>
+                    </tr>
+                    <tr>
+                        <td>mezclar</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            
+            <div class="col-md-4">
+            <table class="table">
+                <thead>
+                    <tr class="table-primary">
+                    <th scope="col">Verbo de cocción <br> (usan tiempo y temperatura) </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>cocinar al vapor</td>
+                    </tr>
+                    <tr>
+                        <td>escalfar</td>
+                    </tr>
+                    <tr>
+                        <td>hervir</td>
+                    </tr>
+                    <tr>
+                        <td>guisar</td>
+                    </tr>
+                    <tr>
+                        <td>sofreir</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <div class="col-md-4">
+            <table class="table">
+                <thead>
+                    <tr class="table-primary">
+                    <th scope="col">Verbo de persona</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>pelar</td>
+                    </tr>
+                    <tr>
+                        <td>trocear</td>
+                    </tr>
+                    <tr>
+                        <td>moler</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
         </div>
     </div>
     
@@ -148,8 +242,8 @@
                 <div class="col-md-7 mt-md-0 mt-3">
                     <!-- Content -->
                     <h5 class="text-uppercase text-light">Información</h5>
-                    <p class="text-light"> Herramienta desarrollada por Elena Hervás, Raúl Bernalte Sánchez,
-                    Enrique Cepeda y Elena María Ruiz </p>
+                    <p class="text-light"> Herramienta desarrollada por Raúl Bernalte,
+                        Enrique Cepeda, Elena Hervás y Elena María Ruiz</p>
                 </div>
                 <hr class="clearfix w-100 d-md-none pb-3">
             </div>

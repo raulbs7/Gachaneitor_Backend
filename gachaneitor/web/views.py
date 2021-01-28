@@ -42,7 +42,7 @@ class IndexView(TemplateView):
                 tipo_verbo = paso["tipo_verbo"]
                 ingredientes_str = ""
                 for ingrediente in paso["ingredientes"]:
-                    ingredientes_str += ingrediente + " " + str(paso["ingredientes"][ingrediente]["cantidad"]) + paso["ingredientes"][ingrediente]["unidad"] + ", " 
+                    ingredientes_str +=  str(paso["ingredientes"][ingrediente]["cantidad"]) + " " + paso["ingredientes"][ingrediente]["unidad"] + " de " + ingrediente + ", " 
                 ingredientes_str = ingredientes_str[:-2]
 
                 if tipo_verbo == "persona":

@@ -23,10 +23,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                  <li class="nav-item">
-                    <a class="nav-link" href="/howto">Como crear una receta </a>
+                    <a class="nav-link" href="/howto">Cómo crear una receta</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Introducir receta </a>
+                    <a class="nav-link" href="/">Introducir receta</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/recetas">Recetario</a>
@@ -60,10 +60,10 @@
                             {% for paso in receta.paso_set.all %}
                                 {% if paso.temperatura %}
                                 <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }},
-                                    a una temperatura de {{ paso.temperatura }} {{ paso.ud_temperatura }}.</li>
+                                a una temperatura de {{ paso.temperatura }} {{ paso.ud_temperatura }} durante {{ paso.tiempo }} {{paso.ud_tiempo}}.</li>
                                 {% elif paso.velocidad %}
                                 <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }},
-                                    a velocidad {{ paso.velocidad }}.</li>
+                                    a velocidad {{ paso.velocidad }} durante {{ paso.tiempo }} {{paso.ud_tiempo}}.</li>
                                 {% else %}
                                 <li class="card-text">{{ paso.verbo }} {{ paso.ingredientes }}.</li>
                                 {% endif %}
@@ -123,8 +123,8 @@
                 </div>
                 <div class="col-md-7 mt-md-0 mt-3">
                     <h5 class="text-uppercase text-light">Información</h5>
-                    <p class="text-light">Herramienta desarrollada por Elena Hervás, Raúl Bernalte Sánchez,
-                        Enrique Cepeda y Elena María Ruiz</p>
+                    <p class="text-light">Herramienta desarrollada por Raúl Bernalte,
+                        Enrique Cepeda, Elena Hervás y Elena María Ruiz</p>
                 </div>
                 <hr class="clearfix w-100 d-md-none pb-3">
             </div>
